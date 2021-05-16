@@ -1,0 +1,26 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - echo Entering install phase...
+      - ls -la
+      - chmod +x gradlew
+    runtime-versions:
+      java: corretto11
+  pre_build:
+    commands:
+      - echo This is a pre build
+      - ./gradlew --version
+  build:
+    commands:
+      - echo Build started on `date`
+      - ./gradlew build -x test
+  post_build:
+    commands:
+      - echo Build must be completed
+      - ./gradlew test
+artifacts:
+  type: zip
+  files:
+    - 'build/libs/produto-web-pipeline-0.1-all.jar'
+    - appspec.yml
